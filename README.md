@@ -42,6 +42,11 @@ This project implements a modular ROS 2 control system for the turtlesim simulat
 Start the complete system using the launch file (this starts turtlesim, parameter configs, and all control servers):
    ros2 launch lab1_bringup lab1.launch.py
 
+To open a demo automatic command use:
+   ros2 launch lab1_bringup square.launch.py
+
+This launches a a square of side length 3 after a few seconds of launching.
+
 ### Commands for Actions, Services, and Nodes
 
 #### 1. Go To Pose Action (/go_to_pose)
