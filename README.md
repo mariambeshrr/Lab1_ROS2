@@ -36,3 +36,37 @@ This project implements a modular ROS 2 control system for the turtlesim simulat
    ```bash
    cd ~/ros2_ws
    colcon build --packages-select lab1_interfaces lab1_control lab1_bringup
+
+## How to Run
+
+Start the complete system using the launch file (this starts turtlesim, parameter configs, and all control servers):
+   ros2 launch lab1_bringup lab1.launch.py
+
+### Commands for Actions, Services, and Nodes
+
+#### 1. Go To Pose Action (/go_to_pose)
+Sends the turtle to a specific coordinate and orientation:
+   ros2 action send_goal /go_to_pose lab1_interfaces/action/GoToPose "{target: {x: 8.0, y: 8.0, yaw: 1.57}}" --feedback
+
+#### 2. Draw Square Action (/draw_square)
+Triggers the turtle to reset and draw a square of a specified side length (e.g., 3.0 meters):
+   ros2 action send_goal /draw_square lab1_interfaces/action/DrawSquare "{side_length: 3.0}" --feedback
+
+#### 3. Reset Service (/reset_turtle)
+Clears the canvas and teleports the turtle back to the center position $(5.54, 5.54)$ without drawing a connecting line:
+   ros2 service call /reset_turtle std_srvs/srv/Trigger
+
+#### 4. Speed Limits Service (/set_speed_limits)
+Dynamically updates the maximum linear and angular speed parameters during runtime:
+   ros2 service call /set_speed_limits lab1_interfaces/srv/SetSpeedLimits "{max_linear_speed: 1.5, max_angular_speed: 1.5}"
+
+#### 5. ROS 2 Parameters Management
+  ##### List parameters:
+     ros2 param list /go_to_pose_server
+
+  ##### Get a parameter value:
+     ros2 param get /go_to_pose_server max_linear_speed
+  ##### Set a parameter value directly:
+     ros2 param set /go_to_pose_server max_linear_speed 1.0
+     
+    
