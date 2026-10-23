@@ -1,0 +1,10 @@
+# Goal
+float64 side_length
+---
+# Result
+bool success
+string message
+---
+# Feedback
+int32 current_side
+TargetPose current_target

@@ -1,0 +1,10 @@
+# Goal
+TargetPose target
+---
+# Result
+bool success
+TargetPose final_pose
+---
+# Feedback
+float64 distance_remaining
+float64 angle_error
