@@ -34,8 +34,11 @@ This project implements a modular ROS 2 control system for the turtlesim simulat
 1. Copy your package folders (`lab1_interfaces`, `lab1_control`, and `lab1_bringup`) into the `src` directory of your ROS 2 workspace (e.g., `~/ros2_ws/src/`).
 2. Open your terminal, navigate to your workspace root, and build the packages using `colcon`:
    ```bash
-   cd ~/ros2_ws
-   colcon build --packages-select lab1_interfaces lab1_control lab1_bringup
+   cd ~/ros2_ws/src
+   git clone https://github.com/mariambeshrr/Lab1_ROS2.git
+   cd ..
+   colcon build
+   source insall/setup.bash
 
 ## How to Run
 
