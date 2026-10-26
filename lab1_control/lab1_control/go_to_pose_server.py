@@ -18,11 +18,11 @@ from lab1_interfaces.srv import SetSpeedLimits
 
 class GoToPoseServer(Node):
     POS_TOL = 0.05          # position tolerance
-    YAW_TOL = 0.02          # final heading tolerance (rad)
-    HEADING_THRESHOLD = 0.2 # turn in place if heading error is bigger (rad)
+    YAW_TOL = 0.02          # final heading tolerance 
+    HEADING_THRESHOLD = 0.2 # turn in place if heading error is bigger
     K_LIN = 1.5             # linear gain
     K_ANG = 6.0             # angular gain
-    LOOP_DT = 0.02          # 50 Hz
+    LOOP_DT = 0.02       
     WORLD_MIN, WORLD_MAX = 0.0, 11.0
 
     def __init__(self):
@@ -117,7 +117,7 @@ class GoToPoseServer(Node):
                 self.get_logger().info('Goal canceled')
                 return self.make_result(False)
 
-            # Read limits every iteration so changes apply live
+    
             max_v = self.get_parameter('max_linear_speed').value
             max_w = self.get_parameter('max_angular_speed').value
 
@@ -131,15 +131,15 @@ class GoToPoseServer(Node):
                     phase = 'rotate'
                     continue
                 raw_err = math.atan2(dy, dx) - self.pose.theta
-                angle_err = math.atan2(math.sin(raw_err), math.cos(raw_err))  # wrap to [-pi, pi]
+                angle_err = math.atan2(math.sin(raw_err), math.cos(raw_err)) 
                 if abs(angle_err) > self.HEADING_THRESHOLD:
                     cmd.angular.z = max(-max_w, min(max_w, self.K_ANG * angle_err))
                 else:
                     cmd.linear.x = max(-max_v, min(max_v, self.K_LIN * dist))
                     cmd.angular.z = max(-max_w, min(max_w, self.K_ANG * angle_err))
-            else:  # rotate to final yaw
+            else:  
                 raw_err = target.yaw - self.pose.theta
-                angle_err = math.atan2(math.sin(raw_err), math.cos(raw_err))  # wrap to [-pi, pi]
+                angle_err = math.atan2(math.sin(raw_err), math.cos(raw_err)) 
                 if abs(angle_err) < self.YAW_TOL:
                     break
                 cmd.angular.z = max(-max_w, min(max_w, self.K_ANG * angle_err))

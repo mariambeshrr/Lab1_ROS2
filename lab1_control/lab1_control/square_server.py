@@ -17,10 +17,8 @@ class SquareActionServer(Node):
             self, DrawSquare, 'draw_square', self.execute_callback,
             callback_group=cb_group
         )
-        self._goto_client = ActionClient(self, GoToPose, 'go_to_pose', 
-                                         callback_group=cb_group)
-        self.reset_client = self.create_client(Trigger, '/reset_turtle',
-                                               callback_group=cb_group)
+        self._goto_client = ActionClient(self, GoToPose, 'go_to_pose', callback_group=cb_group)
+        self.reset_client = self.create_client(Trigger, '/reset_turtle', callback_group=cb_group)
         self.get_logger().info('Square Action Server Ready')
 
     def execute_callback(self, goal_handle):
